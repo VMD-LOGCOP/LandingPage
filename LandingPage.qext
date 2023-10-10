@@ -1,15 +1,15 @@
 {
-	"name": "LandingPage",
-	"description": "Template for making landing page that serves as central hub for links to various applications.",
-	"icon": "table",
-	"type": "visualization",
-	"version": "2.0.0",
-	"author": "Jan Iverson Eligio",
-	"homepage": "",
-	"keywords": "qlik-sense, visualization, landing, page",
-	"license": "",
-	"repository": "https://github.com/VMD-LOGCOP/LandingPage",
-	"dependencies": {
-		"qlik-sense": ">=3.0.x"
-	}
+    "name": "LandingPage",
+    "description": "Template for making landing page that serves as central hub for links to various applications.",
+    "icon": "extension",
+    "type": "visualization",
+    "version": "3.0.0",
+    "author": "Jan Iverson Eligio",
+    "homepage": "",
+    "keywords": "qlik-sense, visualization, landing, page",
+    "license": "",
+    "repository": "https://github.com/VMD-LOGCOP/LandingPage",
+    "dependencies": {
+        "qlik-sense": ">=3.0.x"
+    }
 }
