@@ -211,16 +211,25 @@ define(['./About', './utils'], function (About, Util) {
                 },
             },
 
-            isSipr: {
-                type: 'boolean',
-                component: 'radiobuttons',
-                label: 'NIPR/SIPR',
-                defaultValue: false,
-                ref: 'pageSettings.isSipr',
-                options: [
-                    { value: false, label: 'NIPR' },
-                    { value: true, label: 'SIPR' },
-                ],
+            classificationSettings: {
+                type: 'items',
+                items: {
+                    sectionTitle: {
+                        label: 'If this landing page is on SIPR toggle this option to ensure links work properly.',
+                        component: 'text',
+                    },
+                    isSipr: {
+                        type: 'boolean',
+                        component: 'radiobuttons',
+                        label: 'NIPR/SIPR',
+                        defaultValue: false,
+                        ref: 'pageSettings.isSipr',
+                        options: [
+                            { value: false, label: 'NIPR' },
+                            { value: true, label: 'SIPR' },
+                        ],
+                    },
+                },
             },
 
             dataSection: {
