@@ -10,90 +10,112 @@ define(['jquery', './utils'], function ($, Util) {
         makeClassFromTitle,
         navigateToSheet,
         navigateToUrlInNewTab,
-    } = Util
+    } = Util;
 
     return function render(layout) {
         function qualifySelector(selector) {
             // Use this when making jQuery selections
             // so other qlik objects are not targeted
-            const contentId = `#${getObjectContentId(layout)}` // Prepend to every query
+            const contentId = `#${getObjectContentId(layout)}`; // Prepend to every query
 
-            return `${contentId} ${selector}`
+            return `${contentId} ${selector}`;
         }
 
-        const pageTitle = layout.pageSettings.pageTitle
-        const isSipr = layout.pageSettings.isSipr
+        const pageTitle = layout.pageSettings.pageTitle;
+        const isSipr = layout.pageSettings.isSipr;
         const pageTitleBackgroundColor =
-            layout.pageSettings.pageTitleBackgroundColor.color
-        const pageTitleTextColor = layout.pageSettings.pageTitleTextColor.color
+            layout.pageSettings.pageTitleBackgroundColor.color;
+        const pageTitleTextColor = layout.pageSettings.pageTitleTextColor.color;
         const pageBackgroundColor =
-            layout.pageSettings.pageBackgroundColor.color
-        const logoUrl = layout.pageSettings.logoMedia
-        const logoLink = layout.pageSettings.logoLink
-        const customCardDimensions = layout.pageSettings.customCardDimensions
+            layout.pageSettings.pageBackgroundColor.color;
+        const logoUrl = layout.pageSettings.logoMedia;
+        const logoLink = layout.pageSettings.logoLink;
+        const customCardDimensions = layout.pageSettings.customCardDimensions;
 
-        $(`header#${getObjectTitleId(layout)}`).css('display', 'none') // Remove title (The default qlik one that leaves ugly white space at the top)
+        const pageTitleBackgroundColorExpression =
+            layout.pageSettings.pageTitleBackgroundColorExpression;
 
-        $(qualifySelector('.pacom-page-title')).text(pageTitle) // Set page title if it has changed
+        const isExpressionPageTitleBackgroundColor =
+            layout.pageSettings.isExpressionPageTitleBackgroundColor;
+
+        $(`header#${getObjectTitleId(layout)}`).css('display', 'none'); // Remove title (The default qlik one that leaves ugly white space at the top)
+
+        $(qualifySelector('.pacom-page-title')).text(pageTitle); // Set page title if it has changed
         $(qualifySelector('.pacom-wrapper')).css(
             'background-color',
             pageBackgroundColor
-        )
+        );
 
         // Set top left logo image
         if (logoUrl) {
-            $(qualifySelector('.pacom-logo')).attr('src', logoUrl)
+            $(qualifySelector('.pacom-logo')).attr('src', logoUrl);
+        } else {
+            $(qualifySelector('.pacom-logo')).removeAttr('src');
         }
 
         // Set logo link if not empty or null
-        $(qualifySelector('.pacom-logo')).off() // Clear event handlers
+        $(qualifySelector('.pacom-logo')).off(); // Clear event handlers
 
         if (logoLink) {
             $(qualifySelector('.pacom-logo')).click(function () {
-                navigateToUrlInNewTab(logoLink)
-            })
+                navigateToUrlInNewTab(logoLink);
+            });
         }
 
-        if (pageTitleBackgroundColor) {
+        // Set the header bg color
+        if (
+            isExpressionPageTitleBackgroundColor &&
+            pageTitleBackgroundColorExpression
+        ) {
+            $(qualifySelector('.pacom-page-title')).css(
+                'background-color',
+                pageTitleBackgroundColorExpression
+            );
+        } else if (pageTitleBackgroundColor) {
             $(qualifySelector('.pacom-page-title')).css(
                 'background-color',
                 pageTitleBackgroundColor
-            )
+            );
         }
 
+        // Set header text color
         if (pageTitleTextColor) {
             $(qualifySelector('.pacom-page-title')).css(
                 'color',
                 pageTitleTextColor
-            )
+            );
         }
 
         // Change dimensions of each card
         if (customCardDimensions) {
-            const { cardHeight, cardWidth } = layout.pageSettings
+            const { cardHeight, cardWidth } = layout.pageSettings;
 
             // Disable min-width and aspect-ratio for the cards
-            $(qualifySelector('.col')).css('min-width', 'auto')
-            $(qualifySelector('.col')).css('aspect-ratio', 'auto')
+            $(qualifySelector('.col')).css('min-width', 'auto');
+            $(qualifySelector('.col')).css('aspect-ratio', 'auto');
 
             if (!Number.isNaN(cardHeight)) {
                 $(qualifySelector('.front')).css(
                     'min-height',
                     `${cardHeight}px`
-                )
-                $(qualifySelector('.back')).css('min-height', `${cardHeight}px`)
+                );
+                $(qualifySelector('.back')).css(
+                    'min-height',
+                    `${cardHeight}px`
+                );
             }
 
             if (!Number.isNaN(cardWidth)) {
-                $(qualifySelector('.front')).css('width', `${cardWidth}px`)
-                $(qualifySelector('.back')).css('width', `${cardWidth}px`)
+                $(qualifySelector('.front')).css('width', `${cardWidth}px`);
+                $(qualifySelector('.back')).css('width', `${cardWidth}px`);
             }
         }
 
         for (const menuItem of layout.menuItems) {
-            $('<style>').html(menuItem.customCss).appendTo('head')
+            $('<style>').html(menuItem.customCss).appendTo('head');
 
-            const cardClass = menuItem.cardClass || makeClassFromTitle(menuItem)
+            const cardClass =
+                menuItem.cardClass || makeClassFromTitle(menuItem);
 
             if (cardClass) {
                 /* Apply custom background image */
@@ -101,30 +123,30 @@ define(['jquery', './utils'], function ($, Util) {
                     $(qualifySelector(`.${cardClass} > .front`)).css(
                         'background-image',
                         getBackgroundImageUrl({ menuItem })
-                    )
+                    );
                 }
 
                 if (menuItem.coverImageMedia) {
                     $(qualifySelector(`.${cardClass} > .front`)).css(
                         'background-image',
                         `url(${menuItem.coverImageMedia})`
-                    )
+                    );
                 }
 
                 if (menuItem.isFlippable) {
-                    $(qualifySelector(`.container.${cardClass}`)).off() // Unassign any event handlers
+                    $(qualifySelector(`.container.${cardClass}`)).off(); // Unassign any event handlers
                     /* Toggle hover class for cards on hover */
                     $(qualifySelector(`.container.${cardClass}`)).hover(
                         function () {
-                            $(this).toggleClass('hover')
+                            $(this).toggleClass('hover');
                         }
-                    )
+                    );
                     /* Make it so when you click on a card it stays flipped */
                     $(qualifySelector(`.container.${cardClass}`)).click(
                         function () {
-                            $(this).toggleClass('keep-hovered')
+                            $(this).toggleClass('keep-hovered');
                         }
-                    )
+                    );
                 }
 
                 if (
@@ -133,11 +155,11 @@ define(['jquery', './utils'], function ($, Util) {
                     (menuItem.href || menuItem.sheetId)
                 ) {
                     /* Determine the onClick callback */
-                    let handler
+                    let handler;
                     if (menuItem.sheetId && isSheetLink(menuItem)) {
                         handler = function () {
-                            navigateToSheet(menuItem.sheetId)
-                        }
+                            navigateToSheet(menuItem.sheetId);
+                        };
                     } else {
                         handler = function () {
                             navigateToUrlInNewTab(
@@ -145,17 +167,17 @@ define(['jquery', './utils'], function ($, Util) {
                                     menuItem,
                                     isSipr,
                                 })
-                            )
-                        }
+                            );
+                        };
                     }
 
                     /* Assign onClick event handler */
                     $(qualifySelector(`.${cardClass}`))
                         .parent()
-                        .off()
+                        .off();
                     $(qualifySelector(`.${cardClass}`))
                         .parent()
-                        .click(handler)
+                        .click(handler);
                 } else if (
                     !isNotLink(menuItem) &&
                     (menuItem.href || menuItem.sheetId)
@@ -163,9 +185,9 @@ define(['jquery', './utils'], function ($, Util) {
                     if (menuItem.sheetId && isSheetLink(menuItem)) {
                         $(qualifySelector(`.${cardClass} > .back > a`)).click(
                             function () {
-                                navigateToSheet(menuItem.sheetId)
+                                navigateToSheet(menuItem.sheetId);
                             }
-                        )
+                        );
                     } else {
                         $(qualifySelector(`.${cardClass} > .back > a`)).attr(
                             'href',
@@ -173,7 +195,7 @@ define(['jquery', './utils'], function ($, Util) {
                                 menuItem,
                                 isSipr,
                             })
-                        )
+                        );
                     }
                 } else {
                     // No link for this card
@@ -197,7 +219,7 @@ define(['jquery', './utils'], function ($, Util) {
                                 qualifySelector(
                                     `.${cardClass} .coming-soon-ribbon`
                                 )
-                            ).toggleClass('font-smaller')
+                            ).toggleClass('font-smaller');
                         }
                     }
                 }
@@ -205,19 +227,21 @@ define(['jquery', './utils'], function ($, Util) {
 
             /* Apply custom front/back styles */
             if (menuItem.cardFrontStyles) {
-                const cardFrontEl = $(qualifySelector(`.${cardClass} > .front`))
+                const cardFrontEl = $(
+                    qualifySelector(`.${cardClass} > .front`)
+                );
                 cardFrontEl.attr(
                     'style',
                     cardFrontEl.attr('style') + ';' + menuItem.cardFrontStyles
-                )
+                );
             }
 
             if (menuItem.cardBackStyles) {
-                const cardBackEl = $(qualifySelector(`.${cardClass} > .back`))
+                const cardBackEl = $(qualifySelector(`.${cardClass} > .back`));
                 cardBackEl.attr(
                     'style',
                     cardBackEl.attr('style') + ';' + menuItem.cardBackStyles
-                )
+                );
             }
         }
 
@@ -233,15 +257,15 @@ define(['jquery', './utils'], function ($, Util) {
                   position: absolute;
                   background-image: url('/appcontent/${appId}/kobe.jpg');"></div>`
                 )
-            )
+            );
 
             $(qualifySelector('.jloc > .back')).on('keyup', function (event) {
                 if (event.keyCode === 56) {
-                    $('.easter-egg').css('top', 0)
-                    $('.easter-egg').css('opacity', 1)
+                    $('.easter-egg').css('top', 0);
+                    $('.easter-egg').css('opacity', 1);
                 }
-            })
+            });
         }
         /********************/
-    }
-})
+    };
+});

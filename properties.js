@@ -5,98 +5,211 @@ define(['./About', './utils'], function (About, Util) {
         sheets,
         isWebLink,
         isSheetLink,
-    } = Util
+    } = Util;
 
-    About() // Initialize About panel
+    About(); // Initialize About panel
 
     const pageSettings = {
         type: 'items',
         label: 'Page Settings',
         translation: 'Page Settings',
         ref: 'pageSettings',
+        grouped: true,
         items: {
-            pageTitle: {
-                type: 'string',
-                ref: 'pageSettings.pageTitle',
-                label: 'Title',
-                defaultValue: 'Title',
-            },
-            pageTitleBackgroundColor: {
-                ref: 'pageSettings.pageTitleBackgroundColor',
-                label: 'Title Background Color',
-                component: 'color-picker',
-                type: 'object',
-                defaultValue: {
-                    color: '#004A7C',
+            titleSettings: {
+                type: 'items',
+                label: 'Title settings',
+                translation: 'Title settings',
+                items: {
+                    sectionTitle: {
+                        label: 'Title settings',
+                        component: 'text',
+                    },
+                    pageTitle: {
+                        type: 'string',
+                        ref: 'pageSettings.pageTitle',
+                        label: 'Title',
+                        defaultValue: 'Title',
+                        expression: 'optional',
+                    },
+                    pageTitleBackgroundColor: {
+                        ref: 'pageSettings.pageTitleBackgroundColor',
+                        label: 'Title Background Color',
+                        component: 'color-picker',
+                        type: 'object',
+                        defaultValue: {
+                            color: '#004A7C',
+                        },
+                        show: function (layout) {
+                            return !layout.pageSettings
+                                .isExpressionPageTitleBackgroundColor;
+                        },
+                    },
+                    pageTitleBackgroundColorExpression: {
+                        ref: 'pageSettings.pageTitleBackgroundColorExpression',
+                        label: 'Title Background Color',
+                        type: 'string',
+                        expression: 'optional',
+                        show: function (layout) {
+                            return layout.pageSettings
+                                .isExpressionPageTitleBackgroundColor;
+                        },
+                    },
+                    isExpressionPageTitleBackgroundColor: {
+                        ref: 'pageSettings.isExpressionPageTitleBackgroundColor',
+                        type: 'boolean',
+                        component: 'switch',
+                        label: 'Use expression',
+                        defaultValue: false,
+                        options: [
+                            { label: 'Enabled', value: true },
+                            { label: 'Disabled', value: false },
+                        ],
+                    },
+                    pageTitleTextColor: {
+                        ref: 'pageSettings.pageTitleTextColor',
+                        label: 'Title Text Color',
+                        component: 'color-picker',
+                        type: 'object',
+                        defaultValue: {
+                            color: '#FFFFFF',
+                        },
+                        show: function (layout) {
+                            return !layout.pageSettings
+                                .isExpressionPageTitleTextColor;
+                        },
+                    },
+                    pageTitleTextColorExpression: {
+                        ref: 'pageSettings.pageTitleTextColorExpression',
+                        label: 'Title Text Color',
+                        type: 'string',
+                        expression: 'optional',
+                        show: function (layout) {
+                            return layout.pageSettings
+                                .isExpressionPageTitleTextColor;
+                        },
+                    },
+                    isExpressionPageTitleTextColor: {
+                        ref: 'pageSettings.isExpressionPageTitleTextColor',
+                        type: 'boolean',
+                        component: 'switch',
+                        label: 'Use expression',
+                        defaultValue: false,
+                        options: [
+                            { label: 'Enabled', value: true },
+                            { label: 'Disabled', value: false },
+                        ],
+                    },
                 },
             },
-            pageTitleTextColor: {
-                ref: 'pageSettings.pageTitleTextColor',
-                label: 'Title Text Color',
-                component: 'color-picker',
-                type: 'object',
-                defaultValue: {
-                    color: '#FFFFFF',
+
+            backgroundSettings: {
+                type: 'items',
+                label: 'Background settings',
+                translation: 'Background settings',
+                items: {
+                    pageBackgroundColor: {
+                        ref: 'pageSettings.pageBackgroundColor',
+                        label: 'Background Color',
+                        component: 'color-picker',
+                        type: 'object',
+                        defaultValue: {
+                            color: '#FFFFFF',
+                        },
+                        show: function (layout) {
+                            return !layout.pageSettings
+                                .isExpressionPageBackgroundColor;
+                        },
+                    },
+                    pageBackgroundColorExpression: {
+                        ref: 'pageSettings.pageBackgroundColorExpression',
+                        label: 'Background Color',
+                        type: 'string',
+                        expression: 'optional',
+                        show: function (layout) {
+                            return layout.pageSettings
+                                .isExpressionPageBackgroundColor;
+                        },
+                    },
+                    isExpressionPageBackgroundColor: {
+                        ref: 'pageSettings.isExpressionPageBackgroundColor',
+                        type: 'boolean',
+                        component: 'switch',
+                        label: 'Use expression',
+                        defaultValue: false,
+                        options: [
+                            { label: 'Enabled', value: true },
+                            { label: 'Disabled', value: false },
+                        ],
+                    },
                 },
             },
-            pageBackgroundColor: {
-                ref: 'pageSettings.pageBackgroundColor',
-                label: 'Background Color',
-                component: 'color-picker',
-                type: 'object',
-                defaultValue: {
-                    color: '#FFFFFF',
+
+            cardSettings: {
+                type: 'items',
+                label: 'Card settings',
+                translation: 'Card settings',
+                items: {
+                    customCardDimensions: {
+                        ref: 'pageSettings.customCardDimensions',
+                        type: 'boolean',
+                        component: 'switch',
+                        label: 'Enable custom dimension definition.',
+                        defaultValue: false,
+                        options: [
+                            { label: 'Enabled', value: true },
+                            { label: 'Disabled', value: false },
+                        ],
+                    },
+                    cardHeight: {
+                        show: function (layout) {
+                            return !!layout.pageSettings.customCardDimensions;
+                        },
+                        ref: 'pageSettings.cardHeight',
+                        component: 'slider',
+                        type: 'integer',
+                        label: 'Define the height (px) for all cards',
+                        defaultValue: 442,
+                        min: 0,
+                        max: 1000,
+                        step: 1,
+                    },
+                    cardWidth: {
+                        show: function (layout) {
+                            return !!layout.pageSettings.customCardDimensions;
+                        },
+                        ref: 'pageSettings.cardWidth',
+                        component: 'slider',
+                        type: 'integer',
+                        label: 'Define the width (px) for all cards',
+                        defaultValue: 300,
+                        min: 0,
+                        max: 1000,
+                        step: 1,
+                    },
                 },
             },
-            customCardDimensions: {
-                ref: 'pageSettings.customCardDimensions',
-                type: 'boolean',
-                component: 'switch',
-                label: 'Enable custom dimension definition.',
-                defaultValue: false,
-                options: [
-                    { label: 'Enabled', value: true },
-                    { label: 'Disabled', value: false },
-                ],
-            },
-            cardHeight: {
-                show: function (layout) {
-                    return !!layout.pageSettings.customCardDimensions
+
+            logoSettings: {
+                type: 'items',
+                label: 'Logo settings (top left)',
+                translation: 'Logo settings (top left)',
+                items: {
+                    logoImage: {
+                        type: 'string',
+                        label: 'Logo Image (top left of banner)',
+                        component: 'media',
+                        ref: 'pageSettings.logoMedia',
+                        layoutRef: 'pageSettings.logoMedia',
+                    },
+                    logoLink: {
+                        ref: 'pageSettings.logoLink',
+                        label: 'Logo Link (when clicking logo)',
+                        type: 'string',
+                    },
                 },
-                ref: 'pageSettings.cardHeight',
-                component: 'slider',
-                type: 'integer',
-                label: 'Define the height (px) for all cards',
-                defaultValue: 442,
-                min: 0,
-                max: 1000,
-                step: 1,
             },
-            cardWidth: {
-                show: function (layout) {
-                    return !!layout.pageSettings.customCardDimensions
-                },
-                ref: 'pageSettings.cardWidth',
-                component: 'slider',
-                type: 'integer',
-                label: 'Define the width (px) for all cards',
-                defaultValue: 300,
-                min: 0,
-                max: 1000,
-                step: 1,
-            },
-            logoImage: {
-                type: 'string',
-                label: 'Logo Image (top left of banner)',
-                component: 'media',
-                ref: 'pageSettings.logoMedia',
-                layoutRef: 'pageSettings.logoMedia',
-            },
-            logoLink: {
-                ref: 'pageSettings.logoLink',
-                label: 'Logo Link (when clicking logo)',
-                type: 'string',
-            },
+
             isSipr: {
                 type: 'boolean',
                 component: 'radiobuttons',
@@ -108,20 +221,26 @@ define(['./About', './utils'], function (About, Util) {
                     { value: true, label: 'SIPR' },
                 ],
             },
-            copyDataButton: {
-                component: 'button',
-                label: 'Copy Data to Clipboard',
-                ref: 'pageSettings.copyDataButton',
-                action: exportDataToClipboard,
-            },
-            importDataButton: {
-                component: 'button',
-                label: 'Import Data from Clipboard',
-                ref: 'pageSettings.importDataButton',
-                action: importDataFromClipboard,
+
+            dataSection: {
+                type: 'items',
+                items: {
+                    copyDataButton: {
+                        component: 'button',
+                        label: 'Copy Data to Clipboard',
+                        ref: 'pageSettings.copyDataButton',
+                        action: exportDataToClipboard,
+                    },
+                    importDataButton: {
+                        component: 'button',
+                        label: 'Import Data from Clipboard',
+                        ref: 'pageSettings.importDataButton',
+                        action: importDataFromClipboard,
+                    },
+                },
             },
         },
-    }
+    };
 
     const menuItems = {
         type: 'array',
@@ -316,7 +435,7 @@ define(['./About', './utils'], function (About, Util) {
                 ref: 'customCss',
             },
         },
-    }
+    };
 
     const aboutSection = {
         type: 'items',
@@ -327,7 +446,7 @@ define(['./About', './utils'], function (About, Util) {
                 translation: 'About',
             },
         },
-    }
+    };
 
     return {
         type: 'items',
@@ -337,5 +456,5 @@ define(['./About', './utils'], function (About, Util) {
             menuItems,
             aboutSection,
         },
-    }
-})
+    };
+});

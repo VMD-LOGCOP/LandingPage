@@ -5,6 +5,7 @@ define([
     return function () {
         if (!components.hasComponent('About')) {
             let copyright = `<div class="pacom-about">
+          <h4>Extension name: "LandingPage"</h4>
           <h4>Description</h4>
           <p>
             This is a reusable and customizable landing page that links to differents apps made for the J4.
@@ -24,9 +25,9 @@ define([
           <p>You can view the source code here: 
             <a href="https://github.com/VMD-LOGCOP/LandingPage">repository</a>
           </p>
-        </div>`
+        </div>`;
 
-            let html = copyright
+            let html = copyright;
 
             let aboutComponent = {
                 template: html,
@@ -34,8 +35,8 @@ define([
                     '$scope',
                     function (scope) {
                         let data = function () {
-                            return scope.data
-                        }
+                            return scope.data;
+                        };
                         componentUtils.defineLabel(
                             scope,
                             scope.definition,
@@ -60,14 +61,14 @@ define([
                                 data
                             ),
                             (scope.getDescription = function (description) {
-                                return 'About' === description
-                            })
+                                return 'About' === description;
+                            });
                     },
                 ],
-            }
+            };
             return (
                 components.addComponent('About', aboutComponent), aboutComponent
-            )
+            );
         }
-    }
-})
+    };
+});
