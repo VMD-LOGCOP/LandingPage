@@ -1,7 +1,7 @@
 :root {
-    --primary-bg-color: #6457A6; /* Ultra violet */
-    --secondary-bg-color: #98D2EB; /* Sky blue */
-    --tertiary-bg-color: #E1F2FE; /* Alice blue */
+    --primary-bg-color: #6457a6; /* Ultra violet */
+    --secondary-bg-color: #98d2eb; /* Sky blue */
+    --tertiary-bg-color: #e1f2fe; /* Alice blue */
 
     --fuels-image: url(/appcontent/0695026d-95cb-40bc-8db3-f19e944f9994/j43-fuels.jpg);
     --munitions-image: url(/appcontent/0695026d-95cb-40bc-8db3-f19e944f9994/j43-munitions.jpg);
@@ -37,7 +37,7 @@
 .pacom-logo {
     display: block;
     width: 100%;
-    transition: filter .5s ease-in-out;
+    transition: filter 0.5s ease-in-out;
 }
 
 .pacom-logo:hover {
@@ -53,7 +53,7 @@
     background-color: steelblue;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     box-sizing: border-box;
-    color: #FFF;
+    color: #fff;
     display: flex;
     font-size: 2rem;
     justify-content: center;
@@ -62,7 +62,6 @@
     width: 100%;
     position: relative;
 }
-
 
 .pacom-wrapper {
     box-sizing: border-box;
@@ -81,6 +80,25 @@
 
 .pacom-about {
     padding: 1rem;
+}
+
+.pacom-about h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0.25rem;
+}
+
+.pacom-about p,
+.pacom-about ul {
+    margin-bottom: 0.5rem;
+}
+
+.pacom-about ul {
+    list-style: circle !important;
+    margin-left: 1rem;
 }
 
 .coming-soon-banner {
@@ -104,7 +122,8 @@
     position: absolute;
 }
 
-.coming-soon-ribbon:before, .coming-soon-ribbon:after {
+.coming-soon-ribbon:before,
+.coming-soon-ribbon:after {
     position: absolute;
     z-index: -1;
     content: '';
@@ -119,7 +138,7 @@
     padding: 15px 0; /* Affects size of container */
     background-color: #3498db;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    color: #FFF;
+    color: #fff;
     font: 700 18px/1 'Lato', sans-serif; /* Affects size of container */
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     text-transform: uppercase;
@@ -137,7 +156,8 @@
     left: -10px;
 }
 
-.ribbon-top-left:before, .ribbon-top-left:after {
+.ribbon-top-left:before,
+.ribbon-top-left:after {
     border-top-color: transparent;
     border-left-color: transparent;
 }
@@ -160,10 +180,11 @@
 
 .ribbon-red span {
     /* Main color */
-    background-color: #FF0000;
+    background-color: #ff0000;
 }
 
-.ribbon-red:before, .ribbon-red:after {
+.ribbon-red:before,
+.ribbon-red:after {
     /* Main colors accents (shadow) */
     border: 5px solid #bf0000;
 }
@@ -173,7 +194,8 @@
     background-color: #808080;
 }
 
-.ribbon-grey:before, .ribbon-grey:after {
+.ribbon-grey:before,
+.ribbon-grey:after {
     /* border: 5px solid #9e9e9e; */
     border: 5px solid #606060;
 }
