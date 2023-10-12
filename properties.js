@@ -206,6 +206,7 @@ define(['./About', './utils'], function (About, Util) {
                         ref: 'pageSettings.logoLink',
                         label: 'Logo Link (when clicking logo)',
                         type: 'string',
+                        expression: 'optional',
                     },
                 },
             },
