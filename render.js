@@ -23,20 +23,32 @@ define(['jquery', './utils'], function ($, Util) {
 
         const pageTitle = layout.pageSettings.pageTitle;
         const isSipr = layout.pageSettings.isSipr;
-        const pageTitleBackgroundColor =
-            layout.pageSettings.pageTitleBackgroundColor.color;
-        const pageTitleTextColor = layout.pageSettings.pageTitleTextColor.color;
+
+        // Background color
         const pageBackgroundColor =
             layout.pageSettings.pageBackgroundColor.color;
-        const logoUrl = layout.pageSettings.logoMedia;
-        const logoLink = layout.pageSettings.logoLink;
-        const customCardDimensions = layout.pageSettings.customCardDimensions;
 
+        // Title background color
+        const pageTitleBackgroundColor =
+            layout.pageSettings.pageTitleBackgroundColor.color;
         const pageTitleBackgroundColorExpression =
             layout.pageSettings.pageTitleBackgroundColorExpression;
-
         const isExpressionPageTitleBackgroundColor =
             layout.pageSettings.isExpressionPageTitleBackgroundColor;
+
+        // Title text color
+        const pageTitleTextColor = layout.pageSettings.pageTitleTextColor.color;
+        const pageTitleTextColorExpression =
+            layout.pageSettings.pageTitleTextColorExpression;
+        const isExpressionPageTitleTextColor =
+            layout.pageSettings.isExpressionPageTitleTextColor;
+
+        // Card dimensions
+        const customCardDimensions = layout.pageSettings.customCardDimensions;
+
+        // Logo
+        const logoUrl = layout.pageSettings.logoMedia;
+        const logoLink = layout.pageSettings.logoLink;
 
         $(`header#${getObjectTitleId(layout)}`).css('display', 'none'); // Remove title (The default qlik one that leaves ugly white space at the top)
 
@@ -79,7 +91,12 @@ define(['jquery', './utils'], function ($, Util) {
         }
 
         // Set header text color
-        if (pageTitleTextColor) {
+        if (isExpressionPageTitleTextColor && pageTitleTextColorExpression) {
+            $(qualifySelector('.pacom-page-title')).css(
+                'color',
+                pageTitleTextColorExpression
+            );
+        } else if (pageTitleTextColor) {
             $(qualifySelector('.pacom-page-title')).css(
                 'color',
                 pageTitleTextColor
