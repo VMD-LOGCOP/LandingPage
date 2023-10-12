@@ -27,6 +27,10 @@ define(['jquery', './utils'], function ($, Util) {
         // Background color
         const pageBackgroundColor =
             layout.pageSettings.pageBackgroundColor.color;
+        const pageBackgroundColorExpression =
+            layout.pageSettings.pageBackgroundColorExpression;
+        const isExpressionPageBackgroundColor =
+            layout.pageSettings.isExpressionPageBackgroundColor;
 
         // Title background color
         const pageTitleBackgroundColor =
@@ -53,10 +57,19 @@ define(['jquery', './utils'], function ($, Util) {
         $(`header#${getObjectTitleId(layout)}`).css('display', 'none'); // Remove title (The default qlik one that leaves ugly white space at the top)
 
         $(qualifySelector('.pacom-page-title')).text(pageTitle); // Set page title if it has changed
-        $(qualifySelector('.pacom-wrapper')).css(
-            'background-color',
-            pageBackgroundColor
-        );
+
+        // Set background color
+        if (isExpressionPageBackgroundColor && pageBackgroundColorExpression) {
+            $(qualifySelector('.pacom-wrapper')).css(
+                'background-color',
+                pageBackgroundColorExpression
+            );
+        } else if (pageBackgroundColor) {
+            $(qualifySelector('.pacom-wrapper')).css(
+                'background-color',
+                pageBackgroundColor
+            );
+        }
 
         // Set top left logo image
         if (logoUrl) {
