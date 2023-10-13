@@ -18,6 +18,12 @@ define([
             <li>Removed banner logo if not specified.</li>
           </ul>
 
+          <em>October 12, 2023</em>
+          <ul>
+            <li>Organized extensions settings panel.</li>
+            <li>Added ability to specify colors as expressions</li>
+          </ul>
+
           <h4>Copyright</h4>
           <p>This qlik extension and its content is copyright of Jan Iverson Eligio (c) 2023. All rights reserved.</p>
 
