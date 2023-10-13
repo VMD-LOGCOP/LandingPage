@@ -11,6 +11,7 @@ define(['./About', './utils'], function (About, Util) {
 
     const pageSettings = {
         type: 'items',
+        component: 'expandable-items',
         label: 'Page Settings',
         translation: 'Page Settings',
         ref: 'pageSettings',
@@ -21,10 +22,6 @@ define(['./About', './utils'], function (About, Util) {
                 label: 'Title settings',
                 translation: 'Title settings',
                 items: {
-                    sectionTitle: {
-                        label: 'Title settings',
-                        component: 'text',
-                    },
                     pageTitle: {
                         type: 'string',
                         ref: 'pageSettings.pageTitle',
@@ -213,6 +210,8 @@ define(['./About', './utils'], function (About, Util) {
 
             classificationSettings: {
                 type: 'items',
+                label: 'NIPR/SIPR',
+                translation: 'NIPR/SIPR',
                 items: {
                     sectionTitle: {
                         label: 'If this landing page is on SIPR toggle this option to ensure links work properly.',
@@ -234,6 +233,8 @@ define(['./About', './utils'], function (About, Util) {
 
             dataSection: {
                 type: 'items',
+                label: 'Import/Export data',
+                translation: 'Import/Export data',
                 items: {
                     copyDataButton: {
                         component: 'button',
@@ -254,7 +255,7 @@ define(['./About', './utils'], function (About, Util) {
 
     const menuItems = {
         type: 'array',
-        translation: 'Links',
+        translation: 'Cards',
         ref: 'menuItems',
         min: 1,
         allowAdd: true,
@@ -264,185 +265,232 @@ define(['./About', './utils'], function (About, Util) {
         grouped: true,
         itemTitleRef: 'cardTitle',
         items: {
-            isComingSoon: {
-                type: 'boolean',
-                component: 'switch',
-                ref: 'isComingSoon',
-                label: 'Coming soon banner:',
-                defaultValue: false,
-                options: [
-                    { label: 'Enabled', value: true },
-                    { label: 'Disabled', value: false },
-                ],
-            },
-            ribbonLabel: {
-                type: 'string',
-                ref: 'ribbonLabel',
-                label: 'Ribbon Label',
-                defaultValue: 'IN DEVELOPMENT',
-            },
-            ribbonColor: {
-                type: 'string',
-                component: 'dropdown',
-                ref: 'ribbonColor',
-                label: 'Ribbon Color',
-                defaultValue: 'ribbon-blue',
-                options: [
-                    { label: 'Blue', value: 'ribbon-blue' },
-                    { label: 'Red', value: 'ribbon-red' },
-                    { label: 'Gray', value: 'ribbon-grey' },
-                ],
-            },
-            cardTitle: {
-                type: 'string',
-                ref: 'cardTitle',
-                label: 'Card Title',
-            },
-            cardSubtitle: {
-                type: 'string',
-                ref: 'cardSubtitle',
-                label: 'Card Subtitle',
-            },
-            menuItemType: {
-                type: 'string',
-                component: 'dropdown',
-                ref: 'linkType',
-                label: 'Link Type',
-                options: [
-                    {
-                        label: 'Sheet Link',
-                        value: 'sheet-link',
+            cardSettings: {
+                type: 'items',
+                component: 'expandable-items',
+                grouped: true,
+                items: {
+                    ribbonSettings: {
+                        label: 'Ribbon',
+                        translation: 'Ribbon',
+                        type: 'items',
+                        items: {
+                            isComingSoon: {
+                                type: 'boolean',
+                                component: 'switch',
+                                ref: 'isComingSoon',
+                                label: 'Enable ribbon:',
+                                defaultValue: false,
+                                options: [
+                                    { label: 'Enabled', value: true },
+                                    { label: 'Disabled', value: false },
+                                ],
+                            },
+                            ribbonLabel: {
+                                type: 'string',
+                                ref: 'ribbonLabel',
+                                label: 'Ribbon Label',
+                                defaultValue: 'IN DEVELOPMENT',
+                            },
+                            ribbonColor: {
+                                type: 'string',
+                                component: 'dropdown',
+                                ref: 'ribbonColor',
+                                label: 'Ribbon Color',
+                                defaultValue: 'ribbon-blue',
+                                options: [
+                                    { label: 'Blue', value: 'ribbon-blue' },
+                                    { label: 'Red', value: 'ribbon-red' },
+                                    { label: 'Gray', value: 'ribbon-grey' },
+                                ],
+                            },
+                        },
                     },
-                    {
-                        label: 'Website URL',
-                        value: 'web-link',
+
+                    cardFaceSettings: {
+                        label: 'Card Face',
+                        translation: 'Card Face',
+                        type: 'items',
+                        items: {
+                            cardTitle: {
+                                type: 'string',
+                                ref: 'cardTitle',
+                                label: 'Card Title',
+                            },
+                            cardSubtitle: {
+                                type: 'string',
+                                ref: 'cardSubtitle',
+                                label: 'Card Subtitle',
+                            },
+                            coverImageUrl: {
+                                type: 'string',
+                                ref: 'coverImageUrl',
+                                label: 'Cover Image URL (File name)',
+                                expression: 'optional',
+                            },
+                            coverImageMedia: {
+                                type: 'string',
+                                label: 'Or choose from library: ',
+                                component: 'media',
+                                ref: 'coverImageMedia',
+                                layoutRef: 'coverImageMedia',
+                            },
+                            isFlippable: {
+                                type: 'boolean',
+                                ref: 'isFlippable',
+                                label: 'Card flip',
+                                component: 'switch',
+                                defaultValue: true,
+                                options: [
+                                    {
+                                        label: 'Enabled',
+                                        value: true,
+                                    },
+                                    {
+                                        label: 'Disabled',
+                                        value: false,
+                                    },
+                                ],
+                            },
+                            cardClass: {
+                                type: 'string',
+                                label: 'HTML class (applied to markup)',
+                                ref: 'cardClass',
+                            },
+                        },
                     },
-                    {
-                        label: 'None',
-                        value: 'no-link',
+
+                    cardBackSettings: {
+                        label: 'Card Back',
+                        translation: 'Card Back',
+                        type: 'items',
+                        items: {
+                            cardBackTitle: {
+                                type: 'string',
+                                ref: 'cardBackTitle',
+                                label: 'Title (back of card)',
+                            },
+                            cardDescription: {
+                                type: 'string',
+                                component: 'textarea',
+                                label: 'Description (back of card)',
+                                rows: 10,
+                                ref: 'cardDescription',
+                            },
+                            cardVisitButtonText: {
+                                type: 'string',
+                                ref: 'cardVisitButtonText',
+                                label: 'Text for the link on back of card',
+                            },
+                            cardIsVisitButtonEnabled: {
+                                type: 'boolean',
+                                component: 'switch',
+                                label: "'VISIT' button",
+                                ref: 'cardIsVisitButtonEnabled',
+                                defaultValue: true,
+                                options: [
+                                    {
+                                        label: 'Enabled',
+                                        value: true,
+                                    },
+                                    {
+                                        label: 'Disabled',
+                                        value: false,
+                                    },
+                                ],
+                            },
+                        },
                     },
-                ],
-            },
-            href: {
-                type: 'string',
-                ref: 'href',
-                label: 'URL',
-                show: isWebLink,
-            },
-            sheetId: {
-                type: 'string',
-                component: 'dropdown',
-                ref: 'sheetId',
-                label: 'Sheet',
-                defaultValue: 0,
-                options: sheets,
-                show: isSheetLink,
-            },
-            cardClass: {
-                type: 'string',
-                label: 'HTML class (applied to markup)',
-                ref: 'cardClass',
-            },
-            coverImageUrl: {
-                type: 'string',
-                ref: 'coverImageUrl',
-                label: 'Cover Image URL (File name)',
-            },
-            coverImageMedia: {
-                type: 'string',
-                label: 'Or choose from library: ',
-                component: 'media',
-                ref: 'coverImageMedia',
-                layoutRef: 'coverImageMedia',
-            },
-            isFlippable: {
-                type: 'boolean',
-                ref: 'isFlippable',
-                label: 'Card flip',
-                component: 'switch',
-                defaultValue: true,
-                options: [
-                    {
-                        label: 'Enabled',
-                        value: true,
+
+                    linkSettings: {
+                        label: 'Card Link',
+                        translation: 'Card Link',
+                        type: 'items',
+                        items: {
+                            menuItemType: {
+                                type: 'string',
+                                component: 'dropdown',
+                                ref: 'linkType',
+                                label: 'Link Type',
+                                options: [
+                                    {
+                                        label: 'Sheet Link',
+                                        value: 'sheet-link',
+                                    },
+                                    {
+                                        label: 'Website URL',
+                                        value: 'web-link',
+                                    },
+                                    {
+                                        label: 'None',
+                                        value: 'no-link',
+                                    },
+                                ],
+                            },
+                            href: {
+                                type: 'string',
+                                ref: 'href',
+                                label: 'URL',
+                                show: isWebLink,
+                            },
+                            sheetId: {
+                                type: 'string',
+                                component: 'dropdown',
+                                ref: 'sheetId',
+                                label: 'Sheet',
+                                defaultValue: 0,
+                                options: sheets,
+                                show: isSheetLink,
+                            },
+                            clickToFollowLink: {
+                                type: 'boolean',
+                                ref: 'clickToFollowLink',
+                                label: 'Click anywhere to open link',
+                                component: 'switch',
+                                defaultValue: true,
+                                options: [
+                                    {
+                                        label: 'Enabled',
+                                        value: true,
+                                    },
+                                    {
+                                        label: 'Disabled',
+                                        value: false,
+                                    },
+                                ],
+                            },
+                        },
                     },
-                    {
-                        label: 'Disabled',
-                        value: false,
+
+                    styleSettings: {
+                        label: 'Styles (CSS)',
+                        translation: 'Styles (CSS)',
+                        type: 'items',
+                        items: {
+                            cardFrontStyles: {
+                                type: 'string',
+                                component: 'textarea',
+                                label: 'Custom CSS (Front of Card)',
+                                rows: 10,
+                                ref: 'cardFrontStyles',
+                            },
+                            cardBackStyles: {
+                                type: 'string',
+                                component: 'textarea',
+                                label: 'Custom CSS (Back of card)',
+                                rows: 10,
+                                ref: 'cardBackStyles',
+                            },
+                            customCss: {
+                                type: 'string',
+                                component: 'textarea',
+                                label: 'Custom CSS (Applied to page)',
+                                rows: 10,
+                                ref: 'customCss',
+                            },
+                        },
                     },
-                ],
-            },
-            clickToFollowLink: {
-                type: 'boolean',
-                ref: 'clickToFollowLink',
-                label: 'Click anywhere to open link',
-                component: 'switch',
-                defaultValue: true,
-                options: [
-                    {
-                        label: 'Enabled',
-                        value: true,
-                    },
-                    {
-                        label: 'Disabled',
-                        value: false,
-                    },
-                ],
-            },
-            cardBackTitle: {
-                type: 'string',
-                ref: 'cardBackTitle',
-                label: 'Title (back of card)',
-            },
-            cardDescription: {
-                type: 'string',
-                component: 'textarea',
-                label: 'Description (back of card)',
-                rows: 10,
-                ref: 'cardDescription',
-            },
-            cardVisitButtonText: {
-                type: 'string',
-                ref: 'cardVisitButtonText',
-                label: 'Text for the link on back of card',
-            },
-            cardIsVisitButtonEnabled: {
-                type: 'boolean',
-                component: 'switch',
-                label: "'VISIT' button",
-                ref: 'cardIsVisitButtonEnabled',
-                defaultValue: true,
-                options: [
-                    {
-                        label: 'Enabled',
-                        value: true,
-                    },
-                    {
-                        label: 'Disabled',
-                        value: false,
-                    },
-                ],
-            },
-            cardFrontStyles: {
-                type: 'string',
-                component: 'textarea',
-                label: 'Custom CSS (Front of Card)',
-                rows: 10,
-                ref: 'cardFrontStyles',
-            },
-            cardBackStyles: {
-                type: 'string',
-                component: 'textarea',
-                label: 'Custom CSS (Back of card)',
-                rows: 10,
-                ref: 'cardBackStyles',
-            },
-            customCss: {
-                type: 'string',
-                component: 'textarea',
-                label: 'Custom CSS (Applied to page)',
-                rows: 10,
-                ref: 'customCss',
+                },
             },
         },
     };
