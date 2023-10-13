@@ -270,43 +270,6 @@ define(['./About', './utils'], function (About, Util) {
                 component: 'expandable-items',
                 grouped: true,
                 items: {
-                    ribbonSettings: {
-                        label: 'Ribbon',
-                        translation: 'Ribbon',
-                        type: 'items',
-                        items: {
-                            isComingSoon: {
-                                type: 'boolean',
-                                component: 'switch',
-                                ref: 'isComingSoon',
-                                label: 'Enable ribbon:',
-                                defaultValue: false,
-                                options: [
-                                    { label: 'Enabled', value: true },
-                                    { label: 'Disabled', value: false },
-                                ],
-                            },
-                            ribbonLabel: {
-                                type: 'string',
-                                ref: 'ribbonLabel',
-                                label: 'Ribbon Label',
-                                defaultValue: 'IN DEVELOPMENT',
-                            },
-                            ribbonColor: {
-                                type: 'string',
-                                component: 'dropdown',
-                                ref: 'ribbonColor',
-                                label: 'Ribbon Color',
-                                defaultValue: 'ribbon-blue',
-                                options: [
-                                    { label: 'Blue', value: 'ribbon-blue' },
-                                    { label: 'Red', value: 'ribbon-red' },
-                                    { label: 'Gray', value: 'ribbon-grey' },
-                                ],
-                            },
-                        },
-                    },
-
                     cardFaceSettings: {
                         label: 'Card Face',
                         translation: 'Card Face',
@@ -457,6 +420,43 @@ define(['./About', './utils'], function (About, Util) {
                                         label: 'Disabled',
                                         value: false,
                                     },
+                                ],
+                            },
+                        },
+                    },
+
+                    ribbonSettings: {
+                        label: 'Ribbon',
+                        translation: 'Ribbon',
+                        type: 'items',
+                        items: {
+                            isComingSoon: {
+                                type: 'boolean',
+                                component: 'switch',
+                                ref: 'isComingSoon',
+                                label: 'Enable ribbon:',
+                                defaultValue: false,
+                                options: [
+                                    { label: 'Enabled', value: true },
+                                    { label: 'Disabled', value: false },
+                                ],
+                            },
+                            ribbonLabel: {
+                                type: 'string',
+                                ref: 'ribbonLabel',
+                                label: 'Ribbon Label',
+                                defaultValue: 'IN DEVELOPMENT',
+                            },
+                            ribbonColor: {
+                                type: 'string',
+                                component: 'dropdown',
+                                ref: 'ribbonColor',
+                                label: 'Ribbon Color',
+                                defaultValue: 'ribbon-blue',
+                                options: [
+                                    { label: 'Blue', value: 'ribbon-blue' },
+                                    { label: 'Red', value: 'ribbon-red' },
+                                    { label: 'Gray', value: 'ribbon-grey' },
                                 ],
                             },
                         },
