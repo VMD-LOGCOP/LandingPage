@@ -261,7 +261,7 @@ define(['./About', './utils'], function (About, Util) {
         allowAdd: true,
         allowRemove: true,
         allowMove: true,
-        addTranslation: 'Add Link',
+        addTranslation: 'Add Card',
         grouped: true,
         itemTitleRef: 'cardTitle',
         items: {
