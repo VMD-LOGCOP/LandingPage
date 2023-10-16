@@ -160,7 +160,10 @@ define(['./About', './utils'], function (About, Util) {
                     },
                     cardHeight: {
                         show: function (layout) {
-                            return !!layout.pageSettings.customCardDimensions;
+                            return (
+                                !!layout.pageSettings.customCardDimensions &&
+                                !layout.pageSettings.isExpressionCardDimensions
+                            );
                         },
                         ref: 'pageSettings.cardHeight',
                         component: 'slider',
@@ -173,7 +176,10 @@ define(['./About', './utils'], function (About, Util) {
                     },
                     cardWidth: {
                         show: function (layout) {
-                            return !!layout.pageSettings.customCardDimensions;
+                            return (
+                                !!layout.pageSettings.customCardDimensions &&
+                                !layout.pageSettings.isExpressionCardDimensions
+                            );
                         },
                         ref: 'pageSettings.cardWidth',
                         component: 'slider',
@@ -183,6 +189,43 @@ define(['./About', './utils'], function (About, Util) {
                         min: 0,
                         max: 1000,
                         step: 1,
+                    },
+                    cardHeightExpression: {
+                        show: function (layout) {
+                            return (
+                                !!layout.pageSettings.customCardDimensions &&
+                                layout.pageSettings.isExpressionCardDimensions
+                            );
+                        },
+                        ref: 'pageSettings.cardHeightExpression',
+                        type: 'integer',
+                        label: 'Define the height (px) for all cards',
+                        defaultValue: 442,
+                        expression: 'optional',
+                    },
+                    cardWidthExpression: {
+                        show: function (layout) {
+                            return (
+                                !!layout.pageSettings.customCardDimensions &&
+                                layout.pageSettings.isExpressionCardDimensions
+                            );
+                        },
+                        ref: 'pageSettings.cardWidthExpression',
+                        type: 'integer',
+                        label: 'Define the width (px) for all cards',
+                        defaultValue: 300,
+                        expression: 'optional',
+                    },
+                    isExpressionCardDimensions: {
+                        ref: 'pageSettings.isExpressionCardDimensions',
+                        type: 'boolean',
+                        component: 'switch',
+                        label: 'Use expression',
+                        defaultValue: false,
+                        options: [
+                            { label: 'Enabled', value: true },
+                            { label: 'Disabled', value: false },
+                        ],
                     },
                 },
             },

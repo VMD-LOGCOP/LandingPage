@@ -118,26 +118,33 @@ define(['jquery', './utils'], function ($, Util) {
 
         // Change dimensions of each card
         if (customCardDimensions) {
-            const { cardHeight, cardWidth } = layout.pageSettings;
+            const {
+                cardHeight,
+                cardWidth,
+                cardHeightExpression,
+                cardWidthExpression,
+                isExpressionCardDimensions,
+            } = layout.pageSettings;
+
+            const height = isExpressionCardDimensions
+                ? cardHeightExpression
+                : cardHeight;
+            const width = isExpressionCardDimensions
+                ? cardWidthExpression
+                : cardWidth;
 
             // Disable min-width and aspect-ratio for the cards
             $(qualifySelector('.col')).css('min-width', 'auto');
             $(qualifySelector('.col')).css('aspect-ratio', 'auto');
 
-            if (!Number.isNaN(cardHeight)) {
-                $(qualifySelector('.front')).css(
-                    'min-height',
-                    `${cardHeight}px`
-                );
-                $(qualifySelector('.back')).css(
-                    'min-height',
-                    `${cardHeight}px`
-                );
+            if (!Number.isNaN(height)) {
+                $(qualifySelector('.front')).css('min-height', `${height}px`);
+                $(qualifySelector('.back')).css('min-height', `${height}px`);
             }
 
-            if (!Number.isNaN(cardWidth)) {
-                $(qualifySelector('.front')).css('width', `${cardWidth}px`);
-                $(qualifySelector('.back')).css('width', `${cardWidth}px`);
+            if (!Number.isNaN(width)) {
+                $(qualifySelector('.front')).css('width', `${width}px`);
+                $(qualifySelector('.back')).css('width', `${width}px`);
             }
         }
 
