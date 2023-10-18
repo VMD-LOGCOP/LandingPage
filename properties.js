@@ -22,6 +22,17 @@ define(['./About', './utils'], function (About, Util) {
                 label: 'Title settings',
                 translation: 'Title settings',
                 items: {
+                    isHeaderEnabled: {
+                        ref: 'pageSettings.isHeaderEnabled',
+                        type: 'boolean',
+                        component: 'switch',
+                        label: 'Enable header',
+                        defaultValue: true,
+                        options: [
+                            { label: 'Enabled', value: true },
+                            { label: 'Disabled', value: false },
+                        ],
+                    },
                     pageTitle: {
                         type: 'string',
                         ref: 'pageSettings.pageTitle',

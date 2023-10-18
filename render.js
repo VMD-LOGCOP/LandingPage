@@ -33,6 +33,7 @@ define(['jquery', './utils'], function ($, Util) {
             layout.pageSettings.isExpressionPageBackgroundColor;
 
         // Title background color
+        const isHeaderEnabled = layout.pageSettings.isHeaderEnabled;
         const pageTitleBackgroundColor =
             layout.pageSettings.pageTitleBackgroundColor.color;
         const pageTitleBackgroundColorExpression =
@@ -59,7 +60,15 @@ define(['jquery', './utils'], function ($, Util) {
 
         $(`header#${getObjectTitleId(layout)}`).css('display', 'none'); // Remove title (The default qlik one that leaves ugly white space at the top)
 
+        // Header settings
+
         $(qualifySelector('.pacom-page-title')).text(pageTitle); // Set page title if it has changed
+
+        if (isHeaderEnabled) {
+            $(qualifySelector('.pacom-header')).css('display', '');
+        } else {
+            $(qualifySelector('.pacom-header')).css('display', 'none');
+        }
 
         // Set background color
         if (isExpressionPageBackgroundColor && pageBackgroundColorExpression) {
@@ -151,6 +160,7 @@ define(['jquery', './utils'], function ($, Util) {
             }
         }
 
+        // Change font sizes
         if (enabledCustomFontSizes) {
             const bannerFontSize = fonts?.banner?.fontSize;
             const cardTitleFontSize = fonts?.card?.front?.title?.fontSize;
