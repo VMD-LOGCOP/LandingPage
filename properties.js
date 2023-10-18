@@ -251,6 +251,80 @@ define(['./About', './utils'], function (About, Util) {
                 },
             },
 
+            fontSettings: {
+                type: 'items',
+                label: 'Font setings',
+                translation: 'Font settings',
+                items: {
+                    enabledCustomFontSizes: {
+                        ref: 'pageSettings.enabledCustomFontSizes',
+                        type: 'boolean',
+                        component: 'switch',
+                        label: 'Custom font sizes',
+                        defaultValue: false,
+                        options: [
+                            { label: 'Enabled', value: true },
+                            { label: 'Disabled', value: false },
+                        ],
+                    },
+
+                    bannerFontSize: {
+                        ref: 'pageSettings.fonts.banner.fontSize',
+                        type: 'string',
+                        label: 'Banner font size (px/rem)',
+                        defaultValue: null,
+                        expression: 'optional',
+                        show: function (layout) {
+                            return layout.pageSettings.enabledCustomFontSizes;
+                        },
+                    },
+
+                    cardTitleFontSize: {
+                        ref: 'pageSettings.fonts.card.front.title.fontSize',
+                        type: 'string',
+                        label: 'Card title font size (px/rem)',
+                        defaultValue: null,
+                        expression: 'optional',
+                        show: function (layout) {
+                            return layout.pageSettings.enabledCustomFontSizes;
+                        },
+                    },
+
+                    cardSubTitleFontSize: {
+                        ref: 'pageSettings.fonts.card.front.subtitle.fontSize',
+                        type: 'string',
+                        label: 'Card subtitle font size (px/rem)',
+                        defaultValue: null,
+                        expression: 'optional',
+                        show: function (layout) {
+                            return layout.pageSettings.enabledCustomFontSizes;
+                        },
+                    },
+
+                    cardBackTitleFontSize: {
+                        ref: 'pageSettings.fonts.card.back.title.fontSize',
+                        type: 'string',
+                        label: 'Card back title font size (px/rem)',
+                        defaultValue: null,
+                        expression: 'optional',
+                        show: function (layout) {
+                            return layout.pageSettings.enabledCustomFontSizes;
+                        },
+                    },
+
+                    cardBackTextFontSize: {
+                        ref: 'pageSettings.fonts.card.back.text.fontSize',
+                        type: 'string',
+                        label: 'Card back text font size (px/rem)',
+                        defaultValue: null,
+                        expression: 'optional',
+                        show: function (layout) {
+                            return layout.pageSettings.enabledCustomFontSizes;
+                        },
+                    },
+                },
+            },
+
             classificationSettings: {
                 type: 'items',
                 label: 'NIPR/SIPR',

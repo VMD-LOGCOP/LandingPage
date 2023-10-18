@@ -47,8 +47,11 @@ define(['jquery', './utils'], function ($, Util) {
         const isExpressionPageTitleTextColor =
             layout.pageSettings.isExpressionPageTitleTextColor;
 
-        // Card dimensions
+        // Card settings
         const customCardDimensions = layout.pageSettings.customCardDimensions;
+        const enabledCustomFontSizes =
+            layout.pageSettings.enabledCustomFontSizes;
+        const fonts = layout.pageSettings.fonts;
 
         // Logo
         const logoUrl = layout.pageSettings.logoMedia;
@@ -116,7 +119,7 @@ define(['jquery', './utils'], function ($, Util) {
             );
         }
 
-        // Change dimensions of each card
+        // Change settings of each card
         if (customCardDimensions) {
             const {
                 cardHeight,
@@ -146,6 +149,55 @@ define(['jquery', './utils'], function ($, Util) {
                 $(qualifySelector('.front')).css('width', `${width}px`);
                 $(qualifySelector('.back')).css('width', `${width}px`);
             }
+        }
+
+        if (enabledCustomFontSizes) {
+            const bannerFontSize = fonts?.banner?.fontSize;
+            const cardTitleFontSize = fonts?.card?.front?.title?.fontSize;
+            const cardSubtitleFontSize = fonts?.card?.front?.subtitle?.fontSize;
+            const cardBackTitleFontSize = fonts?.card?.back?.title?.fontSize;
+            const cardBackTextFontSize = fonts?.card?.back?.text?.fontSize;
+
+            if (bannerFontSize) {
+                $(qualifySelector('.pacom-page-title')).css(
+                    'font-size',
+                    bannerFontSize
+                );
+            }
+            if (cardTitleFontSize) {
+                $(qualifySelector('.front .inner p')).css(
+                    'font-size',
+                    cardTitleFontSize
+                );
+            }
+            if (cardSubtitleFontSize) {
+                $(qualifySelector('.front .inner span')).css(
+                    'font-size',
+                    cardSubtitleFontSize
+                );
+            }
+            if (cardBackTitleFontSize) {
+                $(qualifySelector('.card-back-title')).css(
+                    'font-size',
+                    cardBackTitleFontSize
+                );
+            }
+            if (cardBackTextFontSize) {
+                $(qualifySelector('.back .inner p')).css(
+                    'font-size',
+                    cardBackTextFontSize
+                );
+            }
+        } else {
+            [
+                '.pacom-page-title',
+                '.front .inner p',
+                '.front .inner span',
+                '.card-back-title',
+                '.back .inner p',
+            ].forEach((selector) => {
+                $(qualifySelector(selector)).css('font-size', '');
+            });
         }
 
         for (const menuItem of layout.menuItems) {
