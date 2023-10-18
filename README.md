@@ -13,3 +13,11 @@ This is a reusable and customizable landing page that links to differents apps m
 
 -   Organized extensions settings panel.
 -   Added ability to specify colors as expressions
+
+**October 16, 2023**
+
+-   Add ability to specify custom card dimensions by expression
+
+**October 18, 2023**
+
+-   Add ability to change font sizes
