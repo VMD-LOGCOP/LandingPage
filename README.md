@@ -12,12 +12,13 @@ This is a reusable and customizable landing page that links to differents apps m
 **October 12, 2023**
 
 -   Organized extensions settings panel.
--   Added ability to specify colors as expressions
+-   Added ability to specify colors as expressions.
 
 **October 16, 2023**
 
--   Add ability to specify custom card dimensions by expression
+-   Add ability to specify custom card dimensions by expression.
 
 **October 18, 2023**
 
--   Add ability to change font sizes
+-   Add ability to change font sizes.
+-   Add ability to toggle header.
