@@ -22,3 +22,4 @@ This is a reusable and customizable landing page that links to differents apps m
 
 -   Add ability to change font sizes.
 -   Add ability to toggle header.
+-   Add ability to hide card.
