@@ -24,3 +24,8 @@ This is a reusable and customizable landing page that links to differents apps m
 -   Add ability to toggle header.
 -   Add ability to hide card.
 -   Add green and orange ribbon color options.
+
+## TODO
+
+-   Fix clipping ribbon test
+-   Make cards look nice if a cover image is not applied
