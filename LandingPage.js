@@ -17,9 +17,9 @@ define([
     cssContent, // Stylesheets are automatically imported
     parallaxCss
 ) {
-    'use strict'
+    'use strict';
 
-    const { appId, getSheetUrl, getHref, makeClassFromTitle } = Util // Import helpers
+    const { appId, getSheetUrl, getHref, makeClassFromTitle } = Util; // Import helpers
 
     return {
         template: template,
@@ -42,43 +42,43 @@ define([
             exportData: true,
         },
         paint: function ($element, layout) {
-            render(layout)
+            render(layout);
 
-            console.log('layout: ', layout.qInfo.qId)
+            console.log('layout: ', layout.qInfo.qId);
 
             if (!window.backendApi) {
-                window.backendApi = {}
+                window.backendApi = {};
             }
 
             if (!window.backendApi[layout.qInfo.qId]) {
                 /* Required to call setProperties() */
-                window.backendApi[layout.qInfo.qId] = this.backendApi
+                window.backendApi[layout.qInfo.qId] = this.backendApi;
             }
 
-            return qlik.Promise.resolve()
+            return qlik.Promise.resolve();
         },
         controller: [
             '$scope',
             function ($scope) {
-                const layout = $scope.layout
-                console.log('layout: ', layout)
+                const layout = $scope.layout;
+                console.log('layout: ', layout);
                 /* Extension settings */
-                $scope.pageTitle = layout.pageSettings.pageTitle
-                $scope.isSipr = layout.pageSettings.isSipr
+                $scope.pageTitle = layout.pageSettings.pageTitle;
+                $scope.isSipr = layout.pageSettings.isSipr;
                 $scope.pageTitleBackgroundColor =
-                    layout.pageSettings.pageTitleBackgroundColor.color
+                    layout.pageSettings.pageTitleBackgroundColor.color;
                 $scope.pageTitleTextColor =
-                    layout.pageSettings.pageTitleTextColor.color
+                    layout.pageSettings.pageTitleTextColor.color;
                 /*********************/
-                $scope.menuItems = layout.menuItems
-                $scope.getSheetUrl = getSheetUrl
-                $scope.getHref = getHref
-                $scope.makeClassFromTitle = makeClassFromTitle
+                $scope.menuItems = layout.menuItems;
+                $scope.getSheetUrl = getSheetUrl;
+                $scope.getHref = getHref;
+                $scope.makeClassFromTitle = makeClassFromTitle;
 
                 $(document).ready(() => {
-                    render(layout)
-                })
+                    render(layout);
+                });
             },
         ],
-    }
-})
+    };
+});
