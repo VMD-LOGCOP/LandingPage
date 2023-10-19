@@ -398,6 +398,30 @@ define(['./About', './utils'], function (About, Util) {
                 component: 'expandable-items',
                 grouped: true,
                 items: {
+                    settings: {
+                        label: 'Settings',
+                        translation: 'Settings',
+                        type: 'items',
+                        items: {
+                            isHidden: {
+                                ref: 'isHidden',
+                                type: 'boolean',
+                                component: 'switch',
+                                label: 'Hide card',
+                                defaultValue: false,
+                                options: [
+                                    {
+                                        label: 'Hidden',
+                                        value: true,
+                                    },
+                                    {
+                                        label: 'Visible',
+                                        value: false,
+                                    },
+                                ],
+                            },
+                        },
+                    },
                     cardFaceSettings: {
                         label: 'Card Face',
                         translation: 'Card Face',
