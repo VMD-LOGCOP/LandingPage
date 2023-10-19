@@ -557,6 +557,10 @@ define(['./About', './utils'], function (About, Util) {
                                 options: sheets,
                                 show: isSheetLink,
                             },
+                            information: {
+                                component: 'text',
+                                label: 'Enable the following option if the link should be navigated when the card is clicked. Disable this option if the user must click on the button on the back of the card to navigate to the link. Note: When this option is disabled clicking on the card will keep the card flipped back.',
+                            },
                             clickToFollowLink: {
                                 type: 'boolean',
                                 ref: 'clickToFollowLink',
