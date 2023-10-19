@@ -33,7 +33,7 @@ define(['jquery', './utils'], function ($, Util) {
             layout.pageSettings.isExpressionPageBackgroundColor;
 
         // Title background color
-        const isHeaderEnabled = layout.pageSettings.isHeaderEnabled;
+        const isHeaderEnabled = layout.pageSettings.isHeaderEnabled !== false;
         const pageTitleBackgroundColor =
             layout.pageSettings.pageTitleBackgroundColor.color;
         const pageTitleBackgroundColorExpression =
