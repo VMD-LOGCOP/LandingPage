@@ -199,3 +199,21 @@ h6 {
     /* border: 5px solid #9e9e9e; */
     border: 5px solid #606060;
 }
+
+.ribbon-orange span {
+    background-color: #fd6a02;
+}
+
+.ribbon-orange:before,
+.ribbon-orange:after {
+    border: 5px solid #be5002;
+}
+
+.ribbon-green span {
+    background-color: #50c878;
+}
+
+.ribbon-green:before,
+.ribbon-green:after {
+    border: 5px solid #32a057;
+}

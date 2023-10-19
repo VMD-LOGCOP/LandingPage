@@ -609,6 +609,8 @@ define(['./About', './utils'], function (About, Util) {
                                     { label: 'Blue', value: 'ribbon-blue' },
                                     { label: 'Red', value: 'ribbon-red' },
                                     { label: 'Gray', value: 'ribbon-grey' },
+                                    { label: 'Orange', value: 'ribbon-orange' },
+                                    { label: 'Green', value: 'ribbon-green' },
                                 ],
                             },
                         },
