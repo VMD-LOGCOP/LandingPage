@@ -403,6 +403,13 @@ define(['./About', './utils'], function (About, Util) {
                         translation: 'Settings',
                         type: 'items',
                         items: {
+                            showCondition: {
+                                ref: 'showCondition',
+                                type: 'integer',
+                                label: 'Show Condition',
+                                defaultValue: 1,
+                                expression: 'optional',
+                            },
                             isHidden: {
                                 ref: 'isHidden',
                                 type: 'boolean',
@@ -431,11 +438,13 @@ define(['./About', './utils'], function (About, Util) {
                                 type: 'string',
                                 ref: 'cardTitle',
                                 label: 'Card Title',
+                                expression: 'optional',
                             },
                             cardSubtitle: {
                                 type: 'string',
                                 ref: 'cardSubtitle',
                                 label: 'Card Subtitle',
+                                expression: 'optional',
                             },
                             coverImageUrl: {
                                 type: 'string',
@@ -471,6 +480,7 @@ define(['./About', './utils'], function (About, Util) {
                                 type: 'string',
                                 label: 'HTML class (applied to markup)',
                                 ref: 'cardClass',
+                                expression: 'optional',
                             },
                         },
                     },
@@ -484,6 +494,7 @@ define(['./About', './utils'], function (About, Util) {
                                 type: 'string',
                                 ref: 'cardBackTitle',
                                 label: 'Title (back of card)',
+                                expression: 'optional',
                             },
                             cardDescription: {
                                 type: 'string',
@@ -491,11 +502,13 @@ define(['./About', './utils'], function (About, Util) {
                                 label: 'Description (back of card)',
                                 rows: 10,
                                 ref: 'cardDescription',
+                                expression: 'optional',
                             },
                             cardVisitButtonText: {
                                 type: 'string',
                                 ref: 'cardVisitButtonText',
                                 label: 'Text for the link on back of card',
+                                expression: 'optional',
                             },
                             cardIsVisitButtonEnabled: {
                                 type: 'boolean',
@@ -547,6 +560,7 @@ define(['./About', './utils'], function (About, Util) {
                                 ref: 'href',
                                 label: 'URL',
                                 show: isWebLink,
+                                expression: 'optional',
                             },
                             sheetId: {
                                 type: 'string',
@@ -602,6 +616,7 @@ define(['./About', './utils'], function (About, Util) {
                                 ref: 'ribbonLabel',
                                 label: 'Ribbon Label',
                                 defaultValue: 'IN DEVELOPMENT',
+                                expression: 'optional',
                             },
                             ribbonColor: {
                                 type: 'string',
@@ -631,6 +646,7 @@ define(['./About', './utils'], function (About, Util) {
                                 label: 'Custom CSS (Front of Card)',
                                 rows: 10,
                                 ref: 'cardFrontStyles',
+                                expression: 'optional',
                             },
                             cardBackStyles: {
                                 type: 'string',
@@ -638,6 +654,7 @@ define(['./About', './utils'], function (About, Util) {
                                 label: 'Custom CSS (Back of card)',
                                 rows: 10,
                                 ref: 'cardBackStyles',
+                                expression: 'optional',
                             },
                             customCss: {
                                 type: 'string',
@@ -645,6 +662,7 @@ define(['./About', './utils'], function (About, Util) {
                                 label: 'Custom CSS (Applied to page)',
                                 rows: 10,
                                 ref: 'customCss',
+                                expression: 'optional',
                             },
                         },
                     },

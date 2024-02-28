@@ -24,6 +24,12 @@ define([
             <li>Added ability to specify colors as expressions</li>
           </ul>
 
+          <em>February 20, 2024</em>
+          <ul>
+            <li>Made card titles, subtitles, and styles optional expressions.</li>
+            <li>Added show condition property for individual cards.</li>
+          </ul>
+
           <h4>Copyright</h4>
           <p>This qlik extension and its content is copyright of Jan Iverson Eligio (c) 2023. All rights reserved.</p>
 

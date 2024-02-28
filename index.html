@@ -8,7 +8,8 @@
 
     <div class="pacom-wrapper">
         <div class="pacom-card-container">
-            <div class="col" ng-repeat="menuItem in menuItems" ng-if="menuItem.isHidden !== true">
+            <div class="col" ng-repeat="menuItem in menuItems"
+                ng-if="menuItem.isHidden !== true && (menuItem.showCondition === undefined ? 1 : menuItem.showCondition) > 0">
                 <div class="container {{ menuItem.cardClass || makeClassFromTitle(menuItem) }}">
                     <div class="front cover-image" tabindex="0">
                         <div ng-if="menuItem.isComingSoon"
